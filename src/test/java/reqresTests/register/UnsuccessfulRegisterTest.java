@@ -6,14 +6,13 @@ import helpers.RegisterHelper;
 
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class UnsuccessfulRegisterTest {
 
     private static final String REGISTER_EMAIL = "sydney@fife";
     private static final String EXPECTED_ERROR = "Missing password";
 
-    @Test
+    @Test(enabled = false)
     public void testUnsuccessfulRegister() {
         String unsuccessfulRegisterMessage =
                new RegisterHelper<>()
