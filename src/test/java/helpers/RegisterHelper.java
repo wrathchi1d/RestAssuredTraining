@@ -1,5 +1,6 @@
 package helpers;
 
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import pojo.RegisterUserRequestEntity;
 import pojo.SuccessfulRegisterResponseEntity;
@@ -24,12 +25,14 @@ public class RegisterHelper<T extends RegisterHelper> {
                 .then().log().all();
     }
 
-    public  SuccessfulRegisterResponseEntity getSuccessfulRegisterEntity(RegisterUserRequestEntity user) {
+    @Step("Get successfully registered '{user}' user")
+    public SuccessfulRegisterResponseEntity getSuccessfulRegisterEntity(RegisterUserRequestEntity user) {
         return registerUser(user)
                 .spec(Specifications.responseSpec(SC_OK))
                 .extract().as(SuccessfulRegisterResponseEntity.class);
     }
 
+    @Step("Get unsuccessfully registered '{user}' user response")
     public UnsuccessfulRegisterResponseEntity getUnsuccessfulRegisterEntity(RegisterUserRequestEntity user) {
         return registerUser(user)
                 .spec(Specifications.responseSpec(SC_BAD_REQUEST))

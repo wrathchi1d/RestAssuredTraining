@@ -1,5 +1,6 @@
 package helpers;
 
+import io.qameta.allure.Step;
 import pojo.CreateUserRequestEntity;
 import pojo.CreateUserResponseEntity;
 import pojo.UserDataResponseEntity;
@@ -12,6 +13,7 @@ import static spec.Specifications.REQUEST_SPEC;
 
 public class UsersHelper {
 
+    @Step("Get all users data")
     public List<UserDataResponseEntity> getUsers() {
         return given()
                 .spec(REQUEST_SPEC)
@@ -21,6 +23,7 @@ public class UsersHelper {
                 .extract().body().jsonPath().getList("data", UserDataResponseEntity.class);
     }
 
+    @Step("Create '{user}' user")
     public CreateUserResponseEntity createUsers(CreateUserRequestEntity user) {
         return given()
                 .spec(REQUEST_SPEC)
