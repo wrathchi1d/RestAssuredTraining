@@ -10,6 +10,7 @@ import java.util.function.UnaryOperator;
 
 import static endpoints.ReqresEndpoints.REGISTER;
 import static io.restassured.RestAssured.given;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 import static spec.Specifications.REQUEST_SPEC;
 
@@ -31,6 +32,7 @@ public class RegisterHelper<T extends RegisterHelper> {
 
     public UnsuccessfulRegisterResponseEntity getUnsuccessfulRegisterEntity(RegisterUserRequestEntity user) {
         return registerUser(user)
+                .spec(Specifications.responseSpec(SC_BAD_REQUEST))
                 .extract().as(UnsuccessfulRegisterResponseEntity.class);
     }
 
